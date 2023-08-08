@@ -36,10 +36,11 @@ const operate = function (firstNumber, operator, secondNumber) {
   }
 };
 
-// function to update main display
+// function to update main display with rounding to the millionth
 const updateMainDisplay = function () {
-  display.textContent = operator + Number(displayValue).toPrecision();
-  };
+  display.textContent =
+    operator + Math.round(Number(displayValue) * 1000000) / 1000000;
+};
 
 // function to calculate results
 const runResult = function () {
