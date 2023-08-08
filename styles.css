@@ -2,3 +2,38 @@ body {
     background-color: black;
     color: white;
 }
+
+.containerMain {
+    display: flex;
+    flex-direction: column;
+    border: 1px;
+    border-color: white;
+    border-radius: 8px;
+    border-style: solid;
+    width: 400px;
+    height: 300px;
+    justify-content: stretch;    
+}
+
+.containerDisplay {
+    background-color: gray;
+    text-align: right;
+    flex-grow: 1;
+    font-size: larger;
+}
+
+.containerButtons {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.columns {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+button {
+    flex-grow: 1;
+}
