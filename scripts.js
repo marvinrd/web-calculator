@@ -44,12 +44,19 @@ const updateMainDisplay = function () {
 
 // function to calculate results
 const runResult = function () {
-  secondNumber = Number(displayValue);
-  displayValue = operate(firstNumber, operator, secondNumber);
-  operator = "";
-  updateMainDisplay();
-  firstNumber = 0;
-  secondNumber = 0;
+  if (secondNumber == 0 && operator == "÷") {
+    display.textContent = "CaLcUlaToR bRoKeN!!!";
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = "";
+  } else if (operator != "") {
+    secondNumber = Number(displayValue);
+    displayValue = operate(firstNumber, operator, secondNumber);
+    operator = "";
+    updateMainDisplay();
+    firstNumber = 0;
+    secondNumber = 0;
+  }
 };
 
 //button listener
@@ -58,7 +65,6 @@ buttons.forEach(function (button) {
     if (this.dataset.group == "number") {
       displayValue += this.dataset.value;
       updateMainDisplay();
-      console.log(displayValue);
     } else if (this.dataset.group == "operator") {
       if (operator == "") {
         firstNumber = Number(displayValue);
@@ -84,6 +90,18 @@ buttons.forEach(function (button) {
       } else {
         return error;
       }
+    } else if (
+      this.dataset.group == "floatModifier" &&
+      Number.isInteger(Number(displayValue))
+    ) {
+      displayValue += this.dataset.value;
+      updateMainDisplay();
+    } else if (
+      this.dataset.group == "backspace" &&
+      Number(displayValue) !== 0
+    ) {
+      displayValue = displayValue.toString().slice(0, -1);
+      updateMainDisplay();
     }
   });
 });
