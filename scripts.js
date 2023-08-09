@@ -36,42 +36,60 @@ const operate = function (firstNumber, operator, secondNumber) {
   }
 };
 
-// function to update main display with rounding to the millionth
+// function to update main display with rounding to the millionth to avoid too many decimals
 const updateMainDisplay = function () {
-  display.textContent =
-    operator + Math.round(Number(displayValue) * 1000000) / 1000000;
+  if (firstNumber != 0) {
+    display.textContent =
+      firstNumber +
+      operator +
+      Math.round(Number(displayValue) * 1000000) / 1000000;
+  } else {
+    display.textContent =
+      operator + Math.round(Number(displayValue) * 1000000) / 1000000;
+  }
 };
 
 // function to calculate results
 const runResult = function () {
+  // control for divide by zero
   if (secondNumber == 0 && operator == "÷") {
     display.textContent = "CaLcUlaToR bRoKeN!!!";
     firstNumber = 0;
     secondNumber = 0;
     operator = "";
-  } else if (operator != "") {
+  }
+
+  // regular scenario
+  else if (operator != "") {
     secondNumber = Number(displayValue);
     displayValue = operate(firstNumber, operator, secondNumber);
     operator = "";
-    updateMainDisplay();
     firstNumber = 0;
     secondNumber = 0;
+    updateMainDisplay();
   }
 };
 
-//button listener
+// UI button event listener
 buttons.forEach(function (button) {
-  button.addEventListener("click", function () {
+  button.addEventListener("click", function (e) {
+
+    // number event
     if (this.dataset.group == "number") {
       displayValue += this.dataset.value;
       updateMainDisplay();
-    } else if (this.dataset.group == "operator") {
+    }
+    // operator event
+    else if (this.dataset.group == "operator") {
+      // first operator instance run as normal
       if (operator == "") {
         firstNumber = Number(displayValue);
         displayValue = 0;
         operator = this.textContent;
         updateMainDisplay();
-      } else {
+      }
+      // subsequent operator instance should calculate result
+      else {
         runResult();
         firstNumber = Number(displayValue);
         displayValue = 0;
@@ -79,7 +97,7 @@ buttons.forEach(function (button) {
         updateMainDisplay();
       }
     } else if (this.dataset.group == "result") {
-      if (this.textContent == "Clear") {
+      if (this.textContent == "Clear All") {
         firstNumber = 0;
         secondNumber = 0;
         operator = "";
@@ -105,3 +123,5 @@ buttons.forEach(function (button) {
     }
   });
 });
+
+// key listener
