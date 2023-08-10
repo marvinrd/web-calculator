@@ -74,8 +74,15 @@ const runResult = function () {
 const listenerLogic = (inputKey, inputGroup) => {
   // number event
   if (inputGroup == "number") {
-    displayValue += inputKey;
-    updateMainDisplay();
+    if (inputKey == "random") {
+      {
+        displayValue += Math.round(Math.random() * 10);
+        updateMainDisplay();
+      }
+    } else {
+      displayValue += inputKey;
+      updateMainDisplay();
+    }
   }
   // operator event
   else if (inputGroup == "operator") {

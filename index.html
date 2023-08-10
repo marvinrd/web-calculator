@@ -9,45 +9,53 @@
 </head>
 <body>
 
-    <h1>Calculator project</h1>
-    <p>Description</p>
+    <div class="textContainer">
+        <div class = headerContainer>
+            <h1>Calculator project</h1>
+            <p class="byMe">by <a href="https://github.com/marvinrd">Marvin Delos Santos</a></p>
+        </div>    
+        <p>This calculator has a keyboard listener. You may use numeric keys and operators including 'Esc' button to clear and 'Enter' button to calculate results</p>
+    </div>
 
-    <div class="containerMain">
-        <div class="containerDisplay">
-            <div id="displayOutput"></div>
-        </div>
-        <div class="containerButtons">
-            <div class="columns">
-                <button data-key="7" data-group="number">7</button>
-                <button data-key="4" data-group="number">4</button>
-                <button data-key="1" data-group="number">1</button>
-                <button data-key="0" data-group="number">0</button>
+    <div class="containerFrame">
+        <div class="containerMain">
+            <div class="containerDisplay">
+                <div id="displayOutput"></div>
             </div>
-            <div class="columns">
-                <button data-key="8" data-group="number">8</button>
-                <button data-key="5" data-group="number">5</button>
-                <button data-key="2" data-group="number">2</button>
-                <button data-key="." data-group="floatModifier">.</button>
-            </div>
-            <div class="columns">
-                <button data-key="9" data-group="number">9</button>
-                <button data-key="6" data-group="number">6</button>
-                <button data-key="3" data-group="number">3</button>
-                <button>‎ </button>
-            </div>
-            <div class="columns">
-                <button data-key="/" data-group="operator">÷</button>
-                <button data-key="*" data-group="operator">*</button>
-                <button data-key="-" data-group="operator">-</button>
-                <button data-key="+" data-group="operator">+</button>
-            </div>
-            <div class="columns">
-                <button data-key="Backspace" data-group="backspace">← back</button>
-                <button data-key="clearAll" data-group="result">Clear All</button>
-                <button data-key="=" data-group="result">=</button>
+            <div class="containerButtons">
+                <div class="columns">
+                    <button class="btnNumeric" data-key="7" data-group="number">7</button>
+                    <button class="btnNumeric" data-key="4" data-group="number">4</button>
+                    <button class="btnNumeric" data-key="1" data-group="number">1</button>
+                    <button class="btnNumeric" data-key="0" data-group="number">0</button>
+                </div>
+                <div class="columns">
+                    <button class="btnNumeric" data-key="8" data-group="number">8</button>
+                    <button class="btnNumeric" data-key="5" data-group="number">5</button>
+                    <button class="btnNumeric" data-key="2" data-group="number">2</button>
+                    <button class="btnNumeric" data-key="." data-group="floatModifier">.</button>
+                </div>
+                <div class="columns">
+                    <button class="btnNumeric" data-key="9" data-group="number">9</button>
+                    <button class="btnNumeric" data-key="6" data-group="number">6</button>
+                    <button class="btnNumeric" data-key="3" data-group="number">3</button>
+                    <button class="btnNumeric" data-key="random" data-group="number">😍</button>
+                </div>
+                <div class="columns">
+                    <button class="btnNumeric" data-key="/" data-group="operator">÷</button>
+                    <button class="btnNumeric" data-key="*" data-group="operator">*</button>
+                    <button class="btnNumeric" data-key="-" data-group="operator">-</button>
+                    <button class="btnNumeric" data-key="+" data-group="operator">+</button>
+                </div>
+                <div class="columns">
+                    <button class="btnResult" data-key="Backspace" data-group="backspace">← back</button>
+                    <button class="btnResult" data-key="clearAll" data-group="result">Clear All</button>
+                    <button class="btnResult" data-key="=" data-group="result">=</button>
+                </div>
             </div>
         </div>
     </div>
+</div>
     
 </body>
 </html>
