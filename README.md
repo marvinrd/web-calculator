@@ -1,5 +1,6 @@
 This is a calculator project using htmls, css & js
 
 Features
-- simple calculations (add, subtract, multiply, divide)
-- simple user interface for mouse interactions
+- Simple calculations (add, subtract, multiply, divide)
+- Simple user interface for mouse interactions
+- Keyboard interactions (Esc to clear all; Enter to calculate)
