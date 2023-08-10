@@ -23,7 +23,7 @@ const divide = (a, b) => {
   return a / b;
 };
 
-//new function operate
+// function operate
 const operate = function (firstNumber, operator, secondNumber) {
   if (operator == "+") {
     return add(firstNumber, secondNumber);
@@ -31,7 +31,7 @@ const operate = function (firstNumber, operator, secondNumber) {
     return subtract(firstNumber, secondNumber);
   } else if (operator == "*") {
     return multiply(firstNumber, secondNumber);
-  } else if (operator == "÷") {
+  } else if (operator == "/") {
     return divide(firstNumber, secondNumber);
   }
 };
@@ -70,58 +70,81 @@ const runResult = function () {
   }
 };
 
+// logic usable for both UI and keyboard interaction
+const listenerLogic = (inputKey, inputGroup) => {
+  // number event
+  if (inputGroup == "number") {
+    displayValue += inputKey;
+    updateMainDisplay();
+  }
+  // operator event
+  else if (inputGroup == "operator") {
+    // first operator instance run as normal
+    if (operator == "") {
+      firstNumber = Number(displayValue);
+      displayValue = 0;
+      operator = inputKey;
+      updateMainDisplay();
+    }
+    // subsequent operator instance should calculate result
+    else {
+      runResult();
+      firstNumber = Number(displayValue);
+      displayValue = 0;
+      operator = inputKey;
+      updateMainDisplay();
+    }
+  } else if (inputGroup == "result") {
+    if (inputKey == "clearAll") {
+      firstNumber = 0;
+      secondNumber = 0;
+      operator = "";
+      displayValue = firstNumber;
+      updateMainDisplay();
+    } else if (inputKey == "=") {
+      runResult();
+    } else {
+      return error;
+    }
+  } else if (
+    inputGroup == "floatModifier" &&
+    Number.isInteger(Number(displayValue))
+  ) {
+    displayValue += inputKey;
+    updateMainDisplay();
+  } else if (inputGroup == "backspace" && Number(displayValue) !== 0) {
+    displayValue = displayValue.toString().slice(0, -1);
+    updateMainDisplay();
+  }
+};
+
 // UI button event listener
 buttons.forEach(function (button) {
   button.addEventListener("click", function (e) {
+    const group = e.target.dataset.group;
+    const key = e.target.dataset.key;
 
-    // number event
-    if (this.dataset.group == "number") {
-      displayValue += this.dataset.value;
-      updateMainDisplay();
-    }
-    // operator event
-    else if (this.dataset.group == "operator") {
-      // first operator instance run as normal
-      if (operator == "") {
-        firstNumber = Number(displayValue);
-        displayValue = 0;
-        operator = this.textContent;
-        updateMainDisplay();
-      }
-      // subsequent operator instance should calculate result
-      else {
-        runResult();
-        firstNumber = Number(displayValue);
-        displayValue = 0;
-        operator = this.textContent;
-        updateMainDisplay();
-      }
-    } else if (this.dataset.group == "result") {
-      if (this.textContent == "Clear All") {
-        firstNumber = 0;
-        secondNumber = 0;
-        operator = "";
-        displayValue = firstNumber;
-        updateMainDisplay();
-      } else if (this.textContent == "=") {
-        runResult();
-      } else {
-        return error;
-      }
-    } else if (
-      this.dataset.group == "floatModifier" &&
-      Number.isInteger(Number(displayValue))
-    ) {
-      displayValue += this.dataset.value;
-      updateMainDisplay();
-    } else if (
-      this.dataset.group == "backspace" &&
-      Number(displayValue) !== 0
-    ) {
-      displayValue = displayValue.toString().slice(0, -1);
-      updateMainDisplay();
-    }
+    listenerLogic(key, group);
   });
 });
 
-// key listener
+// keyboard event listener
+window.addEventListener("keydown", (e) => {
+  const btn = document.querySelector(`button[data-key="${e.key}"]`);
+  if (e.key == "Enter") {
+    runResult();
+  } else if (e.key == "Escape") {
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = "";
+    displayValue = firstNumber;
+    updateMainDisplay();
+  } else if (!btn) {
+    return;
+  } else {
+    const group = btn.dataset.group;
+    const key = btn.dataset.key;
+
+    listenerLogic(key, group);
+  }
+});
