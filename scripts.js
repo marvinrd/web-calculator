@@ -112,7 +112,7 @@ const listenerLogic = (inputKey, inputGroup) => {
   ) {
     displayValue += inputKey;
     updateMainDisplay();
-  } else if (inputGroup == "backspace" && Number(displayValue) !== 0) {
+  } else if (inputKey == "Backspace" && Number(displayValue) !== 0) {
     displayValue = displayValue.toString().slice(0, -1);
     updateMainDisplay();
   }
